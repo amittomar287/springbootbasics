@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +22,7 @@ import com.example.springjpa.AlientRepo;
 import com.example.springjpa.model.AlientJPA;
 
 
-@RestController
+@Controller
 public class ControllerJPA {
 			
 		@Autowired
@@ -115,6 +116,7 @@ public class ControllerJPA {
 		 * @return list of AlientJPA objects
 		 */
 		@PostMapping("/addAlienList")
+		@ResponseBody
 		public List<AlientJPA> saveAlienList(@RequestBody List<AlientJPA> alienList) {
 			System.out.println("list: " + String.valueOf(alienList));
 			alientRepo.saveAll(alienList);
@@ -127,6 +129,7 @@ public class ControllerJPA {
 		 * @return name of Alien and rest message in single string format
 		 */
 		@DeleteMapping("/deleteAlien/{id}")
+		@ResponseBody
 		public String deleteAlien(@PathVariable("id") int alienId) {
 			Optional<AlientJPA> alien = alientRepo.findById(alienId);
 			String alienName = alien.get().getName();
@@ -141,6 +144,7 @@ public class ControllerJPA {
 		 * @return AlientJPA object to show to the user
 		 */
 		@PutMapping("/updateAlien")
+		@ResponseBody
 		public AlientJPA updateAlienRecord(@RequestBody AlientJPA alien) {
 			alientRepo.save(alien);
 			return alien;
