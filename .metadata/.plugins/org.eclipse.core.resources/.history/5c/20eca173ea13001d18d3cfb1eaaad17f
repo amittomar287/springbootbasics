@@ -1,0 +1,46 @@
+package com.example.demo;
+
+import org.springframework.stereotype.Component;
+
+@Component("lap1")
+public class Laptop {
+
+	private int laptopId;
+	private String brand;
+	private String name;
+	
+	
+	public int getLaptopId() {
+		return laptopId;
+	}
+
+
+	public void setLaptopId(int laptopId) {
+		this.laptopId = laptopId;
+	}
+
+
+	public String getBrand() {
+		return brand;
+	}
+
+
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public void show() {
+		System.out.println("compiling..");
+	}
+}

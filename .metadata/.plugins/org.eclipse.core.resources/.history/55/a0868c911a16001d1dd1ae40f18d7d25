@@ -1,0 +1,20 @@
+package com.example.springjpa;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.example.springjpa.model.AlientJPA;
+
+public interface AlientRepo extends JpaRepository<AlientJPA, Integer>{
+
+	String findByName(String name);
+	
+	String findByTech(String tech);
+	
+	AlientJPA findByID(int id); 
+	
+	@Query("from AlientJPA where tech=?1 order by name")
+	List<AlientJPA> getAlienInSortedOrder(String tech);
+}

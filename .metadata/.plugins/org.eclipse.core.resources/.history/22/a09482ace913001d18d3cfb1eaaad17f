@@ -1,0 +1,12 @@
+package com.example.demo;
+
+public class Laptop {
+
+	private int laptopId;
+	private String brand;
+	private String name;
+	
+	public void show() {
+		System.out.println("compiling..");
+	}
+}

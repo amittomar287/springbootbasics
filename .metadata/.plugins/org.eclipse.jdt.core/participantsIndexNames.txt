@@ -1,0 +1,7 @@
+INDEX VERSION 1.131
+C:\Users\Dell-2022\Documents\workspace-spring-tool-suite-4-4.15.2.RELEASE\SpringDemo\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4074483291.index
+\server\src\main\java
+C:\Users\Dell-2022\Documents\workspace-spring-tool-suite-4-4.15.2.RELEASE\SpringDemo\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1951992911.index
+\server\src\main\java
+C:\Users\Dell-2022\Documents\workspace-spring-tool-suite-4-4.15.2.RELEASE\SpringDemo\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\353529589.index
+\springJPA\src\main\java

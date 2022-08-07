@@ -1,0 +1,108 @@
+package com.example.springjpa.controller;
+
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.example.springjpa.AlientRepo;
+import com.example.springjpa.model.AlientJPA;
+
+@Controller
+public class ControllerJPA {
+		
+	@Autowired
+	AlientRepo alientRepo;
+	
+	/**
+	 * method to show home.jsp page when in browser localhost:8080/home is shoot
+	 * as in application.properties contains jsp as suffix so no need to write .jsp at the end
+	 * @return home.jsp
+	 */
+	@RequestMapping("/home")
+	public String index() {
+		return "home";
+	}
+	
+	/**
+	 * method to save Alien data into DB
+	 * @param alien: ALientJPA object
+	 * @return ThankYou.jsp page to show thank you message and other information as well
+	 */
+	@RequestMapping("/addAlien")
+	public String submit(AlientJPA alien) {
+		alientRepo.save(alien);
+		return "ThankYou";
+	}
+	
+	/**
+	 * method to handle back operation when in browser localhost:8080/back is hit
+	 * @return home.jsp page
+	 */
+	@RequestMapping("/back")
+	public String back() {
+		return "home";
+	}
+	
+	/**
+	 * method to show Alien data using id requested from browser, 
+	 * this method will return to jsp page using ModelAndView object
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/getAlien")
+	public ModelAndView showAlien(@RequestParam int id) {
+		ModelAndView mv = new ModelAndView("ShowAlienData");
+		AlientJPA alien = alientRepo.findById(id).orElse(new AlientJPA());
+		mv.addObject("alien" , alien);
+		return mv;
+	}
+	
+	/**
+	 * method to return list of AlienJPA data as response 
+	 * this is mainly requested from Postman and it is not showing into jsp page
+	 * @return list of AlientJPA 
+	 */
+	@RequestMapping("/getAllAliens")
+	@ResponseBody
+	public List<AlientJPA> getAllAliens() {
+		return alientRepo.findAll();
+	}
+	
+	/**
+	 * method to add Alien data into db using postman POST method
+	 * @param alienJPA: object of AlienJPA
+	 * @return save into db 
+	 */
+	@PostMapping("/addAlien")
+	@ResponseBody
+	public AlientJPA saveintoDB(@RequestBody AlientJPA alien) {
+		alientRepo.save(alien);
+		return alien;
+	}
+	
+	/**
+	 * method to provide list of AlientJPA from db into sorted form
+	 * Please checkout AlientRepo for the query part
+	 * @param tech: query based on technology 
+	 * @return ShowAlienDataSorted.jsp page with provided list in sorted order to show on page
+	 */
+	@RequestMapping("/sorted")
+	public ModelAndView sortedList(@RequestParam String tech) {
+		System.out.println("tech: " + tech);
+		ModelAndView mv = new ModelAndView("ShowAlienDataSorted");
+		
+		List list = (List) alientRepo.getAlienInSortedOrder(tech);
+		System.out.println("list: " + list);
+		mv.addObject("lists" , list);
+		return mv;
+	}
+	
+}

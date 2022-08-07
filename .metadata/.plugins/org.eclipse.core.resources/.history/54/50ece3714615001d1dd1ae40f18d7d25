@@ -1,0 +1,33 @@
+package com.example.springjpa.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.springjpa.AlientRepo;
+import com.example.springjpa.model.AlientJPA;
+
+@Controller
+public class ControllerJPA {
+		
+	@Autowired
+	AlientRepo alientRepo;
+	
+	@RequestMapping("/")
+	public String index() {
+		return "home";
+	}
+	
+	@RequestMapping("/addAlien")
+	public String submit(AlientJPA alien) {
+		alientRepo.save(alien);
+		return "ThankYou";
+	}
+	
+	@RequestMapping("/back")
+	public String back() {
+		return "home";
+	}
+	
+}
